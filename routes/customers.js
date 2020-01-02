@@ -30,4 +30,32 @@ router.get('/:id', (req, res) => {
   });
 });
 
+router.put('/:id', (req, res) => {
+  var id = req.params.id;
+  console.log(`Update klant met id ${id}`);
+  customers.updateCustomer(id, (err, data) => {
+    if (!err) {
+      console.log(`update klant met id ${id}`);
+      res.send('okidoki');
+    } else {
+      res.send('Foutje, Bedankt!');
+    }
+  });
+});
+
+router.post('/', (req, res) => {
+  console.log(req.body);
+
+  customers.insertCustomer(req, function(err, data) {
+    if (err) {
+      console.log('Insert failed');
+      res.send('Failed');
+    } else {
+      res.status(200).send('OK');
+    }
+  });
+});
+
+router.delete('/:id', (req, res) => {});
+
 module.exports = router;

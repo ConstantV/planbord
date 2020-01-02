@@ -27,4 +27,45 @@ function getCustomerByID(id, callback) {
   });
 }
 
-module.exports = { getAllCustomers, getCustomerByID };
+function updateCustomer(id, callback) {
+  const qry =
+    "UPDATE customers SET name = 'Marga Verweij', phone='06-21525610' where ID=" +
+    id +
+    ';';
+
+  dbConnection.query(qry, (err, results, fields) => {
+    if (err) {
+      return callback(err);
+    } else {
+      return callback(null, results);
+    }
+  });
+}
+
+//info INSERT
+function insertCustomer(req, callback) {
+  let { name, phone } = req.body;
+  console.log(req.body);
+
+  const qry =
+    "INSERT INTO customers (name, phone) VALUES ('" +
+    name +
+    "', '" +
+    phone +
+    "');";
+  dbConnection.query(qry, (err, results) => {
+    if (err) {
+      return callback(err);
+    } else return callback(null, 'OK');
+  });
+}
+
+function deleteCustomer(id, callback) {}
+
+module.exports = {
+  getAllCustomers,
+  getCustomerByID,
+  updateCustomer,
+  insertCustomer,
+  deleteCustomer
+};

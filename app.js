@@ -1,6 +1,7 @@
 const config = require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const planningRoute = require('./routes/planning');
 const customersRoute = require('./routes/customers');
@@ -26,12 +27,14 @@ const app = express();
 
 //middleware
 app.use(bodyParser.json());
-
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname + '/views/index.html'));
+});
 app.use('/api/customers', customersRoute);
 app.use('/api/resources', resourceRoute);
 app.use('/api/planning', planningRoute);
 const PORT = process.env.PORT;
 
 app.listen(process.env.PORT, () => {
-  console.log(`bServer listening on port ${PORT}`);
+  console.log(`Server listening on port ${PORT}`);
 });
