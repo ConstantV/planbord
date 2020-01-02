@@ -30,7 +30,8 @@ app.use(bodyParser.json());
 app.use('/api/customers', customersRoute);
 app.use('/api/resources', resourceRoute);
 app.use('/api/planning', planningRoute);
+const PORT = process.env.PORT;
 
-app.listen(3000, () => {
-  console.log('Server listening on port 3000');
+app.listen(process.env.PORT, () => {
+  console.log(`bServer listening on port ${PORT}`);
 });
