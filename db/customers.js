@@ -3,7 +3,7 @@ const dbConnection = require('./db');
 function getAllCustomers(callback) {
   const qry = 'SELECT * from customers;';
   dbConnection.query(qry, (err, results, fields) => {
-    console.log(results.length);
+    //console.log(results.length);
     if (err) {
       return callback(err, null);
     }

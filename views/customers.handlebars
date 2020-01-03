@@ -1,0 +1,77 @@
+{{!-- <div class="container"> --}}
+
+
+
+<h2>Klantenlijst</h2>
+{{!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> --}}
+<hr>
+
+<div class="table100 ver2 m-b-110">
+    <div class="table100-head">
+        <table>
+            <thead>
+                <tr class="row100 head">
+                    <th class="cell100 column1">Aanhef</th>
+                    <th class="cell100 column2">Voornaam</th>
+                    <th class="cell100 column3">Achternaam</th>
+                    <th class="cell100 column4">Adres</th>
+                    <th class="cell100 column5">postcode </th>
+                    <th class="cell100 column6">Plaats</th>
+                    <th class="cell100 column7">geb. Datum</th>
+                    <th class="cell100 column8">email</th>
+                    <th class="cell100 column9">Telefoon</th>
+                    <th class="cell100 column10">Aanpassen</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="table100-body js-pscroll">
+        <table>
+            <tbody>
+                {{#each data}}
+                <tr class="row100 body">
+
+                    <td class="cell100 column1">{{aanhef}}</td>
+                    <td class="cell100 column2">{{first_name}}</td>
+                    <td class="cell100 column3">{{lastname}}</td>
+                    <td class="cell100 column4">{{address}}</td>
+                    <td class="cell100 column5">{{postcode}}</td>
+                    <td class="cell100 column6">{{city}}</td>
+                    <td class="cell100 column7">{{datOfBirth}}</td>
+                    <td class="cell100 column8">{{email}}</td>
+                    <td class="cell100 column9">{{phone}}</td>
+                    <td class="cell100 column10">
+                        <center> <a href="/customers/edit/{{ID}}" method="PUT"><i class="fi-xwslxl-pen"></i>
+                            </a></center>
+                    </td>
+                    {{else}}
+                    <p>No data available</p>
+                    {{/each}}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{{!-- </div> --}}
