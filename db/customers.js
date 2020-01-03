@@ -26,14 +26,17 @@ function getCustomerByID(id, callback) {
     }
   });
 }
-
+//!---------------------------------------------------------------
 function updateCustomer(id, callback) {
+  console.log(id);
+  //console.log(data);
+
   const qry =
     "UPDATE customers SET name = 'Marga Verweij', phone='06-21525610' where ID=" +
     id +
     ';';
 
-  dbConnection.query(qry, (err, results, fields) => {
+  dbConnection.query(qry, (err, data) => {
     if (err) {
       return callback(err);
     } else {
@@ -41,16 +44,16 @@ function updateCustomer(id, callback) {
     }
   });
 }
-
+//!---------------------------------------------------------------
 //info INSERT
 function insertCustomer(req, callback) {
-  let { name, phone } = req.body;
-  console.log(name);
+  let { first_name, phone } = req.body;
+  console.log(first_name);
   console.log(phone);
 
   const qry =
-    "INSERT INTO customers (name, phone) VALUES ('" +
-    name +
+    "INSERT INTO customers (first_name, phone) VALUES ('" +
+    first_name +
     "', '" +
     phone +
     "');";

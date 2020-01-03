@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const dbConnection = require('../db/db');
 
 const exphbs = require('express-handlebars');
 
@@ -23,10 +24,7 @@ router.get('/', (req, res) => {
 //info findCustomerByID
 router.get('/edit/:id', (req, res) => {
   var id = req.params.id;
-  console.log(`Klant met id ${id} opgevraagd`);
-
   customers.getCustomerByID(id, function(err, data) {
-    //console.log(data);
     if (!err) {
       let {
         aanhef,
@@ -56,32 +54,57 @@ router.get('/edit/:id', (req, res) => {
     }
   });
 });
-
-router.put('/edit/:id', (req, res) => {
-  console.log(id);
-
-  customers.getCustomerByID(id, function(err, data) {
-    console.log(data);
-    // if (!err) {
-    //   let{ }= data
-
-    // } else {
-    //   res.send('' + err); // ! Hoe kan dit anders???
-    // }
-    //res.end();
-  });
-
+//!--------------------------------------------------
+router.post('/edit/:id', (req, res) => {
   var id = req.params.id;
-  console.log(`Update klant met id ${id}`);
-  customers.updateCustomer(id, (err, data) => {
-    if (!err) {
-      console.log(`update klant met id ${id}`);
-      res.send('okidoki');
-    } else {
-      res.send('Foutje, Bedankt!');
-    }
+
+  var qry =
+    "UPDATE customers SET aanhef='" +
+    req.body.aanhef +
+    "', first_name = '" +
+    req.body.first_name;
+  qry +=
+    "', last_name = '" +
+    req.body.last_name +
+    "', address = '" +
+    req.body.address +
+    "', postcode = '";
+  qry +=
+    req.body.postcode +
+    "', city= '" +
+    req.body.city +
+    "', email= '" +
+    req.body.email +
+    "', phone= '" +
+    req.body.phone +
+    "' WHERE ID =" +
+    id +
+    ';';
+
+  console.log(qry);
+
+  dbConnection.query(qry, (err, results) => {
+    if (!err) res.render('customers');
   });
+
+  // //console.log(req.body);
+  // // let { phone } = req.body;
+  // // console.log(phone);
+
+  // let data = req.body;
+  // customers.updateCustomer(id, (err, data) => {
+  //   if (!err) {
+  //     //console.log(`update klant met id ${id}`);
+  //     res.send('okidoki');
+  //   } else {
+  //     console.log(err);
+
+  //     res.send('Foutje, Bedankt!');
+  //   }
+  // });
 });
+
+//!--------------------------------------------------
 
 router.post('/add', (req, res) => {
   customers.insertCustomer(req, function(err, data) {

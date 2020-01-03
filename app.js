@@ -13,7 +13,10 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 //middleware
+
 app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json());
+
 //folder for static files
 app.use(express.static('public'));
 
