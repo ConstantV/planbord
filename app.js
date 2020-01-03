@@ -26,8 +26,9 @@ const app = express();
 // }
 
 //middleware
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', (req, res) => {
+  //! AANPASSEN
   res.sendFile(path.join(__dirname + '/views/index.html'));
 });
 app.use('/api/customers', customersRoute);

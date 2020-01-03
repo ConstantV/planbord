@@ -45,7 +45,8 @@ function updateCustomer(id, callback) {
 //info INSERT
 function insertCustomer(req, callback) {
   let { name, phone } = req.body;
-  console.log(req.body);
+  console.log(name);
+  console.log(phone);
 
   const qry =
     "INSERT INTO customers (name, phone) VALUES ('" +

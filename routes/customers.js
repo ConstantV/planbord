@@ -44,14 +44,12 @@ router.put('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log(req.body);
-
   customers.insertCustomer(req, function(err, data) {
     if (err) {
       console.log('Insert failed');
       res.send('Failed');
     } else {
-      res.status(200).send('OK');
+      res.redirect('/api/customers'); //laat alle klanten zien
     }
   });
 });
