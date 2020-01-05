@@ -7,4 +7,9 @@ const cn = mysql.createConnection({
   database: process.env.DB
 });
 
+cn.connect(err => {
+  if (err) console.log('Error : No database...');
+  console.log(`Connected to database : ${process.env.DB} `);
+});
+
 module.exports = cn;
