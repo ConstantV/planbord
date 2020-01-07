@@ -3,19 +3,20 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 
+//Routes
 const planningRoute = require('./routes/planning');
 const customersRoute = require('./routes/customers');
 const resourceRoute = require('./routes/resources');
 const homeRoute = require('./routes/home');
+
 const app = express();
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-//middleware
-
+//Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 //folder for static files
 app.use(express.static('public'));
